@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" ></script>
+    <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+    crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+    <script  src="./qts_result.js"></script>
+   <style>
+    .navbar-custom{
+        background-color: #213965;
+    }
+
+    .sidebar-sticky{
+        position: sticky;
+        top: 48px;
+        height: calc(100vh - 48px);
+        padding-top: .5rem;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .nav-link{
+        font-weight: 500;
+        color: #333;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    .feather{
+        margin-right: 4px;
+        color: #333;
+        width: 16px;
+        height: 16px;
+        vertical-align: text-bottom;
+    }
+    .main{
+        background-color: #213965;
+        color:white;
+    }
+    .table{
+        color:white;
+    }
+    
+    .img-div{
+      height: inherit;
+      width: inherit;
+      overflow: hidden;
+    }
+    .com-img{
+      width: 15%;
+      height: 15%;
+      position: relative;
+      top: 10%;
+    }
+    .logo-img{
+      widows: 500px;
+    }       
+     input[type="checkbox"] {
+          display: none;
+        }
+
+        label {
+          border: 1px solid #fff;
+          padding: 10px;
+          display: block;
+          position: relative;
+          margin: 10px;
+          cursor: pointer;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+
+        label::before {
+          background-color: white;
+          color: white;
+          content: " ";
+          display: block;
+          border-radius: 50%;
+          border: 1px solid grey;
+          position: absolute;
+          top: -5px;
+          left: -5px;
+          width: 25px;
+          height: 25px;
+          text-align: center;
+          line-height: 28px;
+          transition-duration: 0.4s;
+          transform: scale(0);
+        }
+
+        label img {
+          height: 100px;
+          width: 100px;
+          transition-duration: 0.2s;
+          transform-origin: 50% 50%;
+        }
+
+        :checked+label {
+          border-color: #ddd;
+        }
+
+        :checked+label::before {
+          content: "✓";
+          background-color: grey;
+          transform: scale(1);
+        }
+
+        :checked+label img {
+          transform: scale(0.9);
+          box-shadow: 0 0 5px #333;
+          z-index: -1;
+        }
+        tbody td:nth-child(2){
+          width: 13em;
+        }
+   </style> 
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+            <a class="navbar-brand mb-0 h1" href="#">stock app</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+          
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                  <li class="nav-item ">
+                    <a class="nav-link" href="#">Home </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Dropdown
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+                 
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+              </div>
+        </nav>
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 d-none d-md-block bg-light sidebar-sticky">
+                    <div>
+                        <ul class="nav flex-column">
+                          <li class="nav-item">
+                              <a href="#" class="nav-link">
+                             <i></i> 
+                              Dashboard</a>
+                          </li>
+                          <li class="nav-item"><a href="#" class="nav-link">Game</a></li>
+                          <li class="nav-item"><a href="#" class="nav-link">News</a></li>
+                          <li class="nav-item"><a href="#" class="nav-link" id="stocks">Stocks</a></li>
+                        </ul>
+                       
+                    </div>
+                </div>
+                <main class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 main" role="main">
+                    <div>
+                        <h1 class="h2">Dashboard</h1>
+                    </div>
+                    <div>
+                        <canvas id="chart" class="canvas" width="600" height="200"></canvas>
+                    </div>
+                    <h2>Companies</h2>
+                    <div class="table-responsive">
+                      <table class="table table-dark">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Logo</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Stock</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr><input type="checkbox">
+                            <th scope="row">1</th>
+                            <td><div class="img-div"><img src="./img/apple.png" class="com-img"></div></td>
+                            <td>AAPL</td>
+                            <td>100</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td><div class="img-div"><img src="./img/axp.png" class="com-img"></div></td>
+                            <td>AXP</td>
+                            <td>30</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td><div class="img-div"><img src="./img/ba.png" class="com-img"></div></td>
+                            <td>BA</td>
+                            <td>40</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td><div class="img-div"><img src="./img/facebook.png" class="com-img"></div></td>
+                            <td>FB</td>
+                            <td>90</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">5</th>
+                            <td><div class="img-div"><img src="./img/intel.png" class="com-img"></div></td>
+                            <td>INTC</td>
+                            <td>80</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">6</th>
+                            <td><div class="img-div"><img src="./img/mcdonalds.png" class="com-img"></div></td>
+                            <td>MCD</td>
+                            <td>30</td>
+                          </tr>
+                          <tr>
+                            <th scope="row">7</th>
+                            <td><div class="img-div"><img src="./img/nike.png" class="com-img"></div></td>
+                            <td>NKE</td>
+                            <td>50</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                </main>
+            </div>
+            
+        </div>
+       <script>
+        const input_stocks = ["AAPL","AXP","BA","CAT","CSCO","CVX","DIS","DD","GS","HD","IBM","INTC","JNJ","JPM","KO","MCD","MMM","MRK","MSFT","NKE","PFE","PG","TRV","UNH","UTX","V","VZ","WBA","WMT","XOM"];
+        var value = QTS("test.csv",10,0.0004,input_stocks,10000,10000000,'GNQTS');
+        console.log(value);
+      </script> 
+    </body>
+</html>
